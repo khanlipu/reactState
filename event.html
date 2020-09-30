@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      class Hotnews extends React.Component{
+        edit(){
+          alert("Edit button clicked");
+        }
+
+        delete(){
+          alert("Delete button clicked");
+        }
+        render(){
+        const props = this.props
+          return(
+            <div className="newsContainer">
+              <h1>{props.children}</h1>
+              <div>
+                <button onClick={this.edit} className="edit">Edit</button>
+                <button onClick={()=> this.delete()}className="delete">Delete</button>
+                
+              </div>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+      <div className="container">
+        <Hotnews>Rain come not yet today in Shah Alam</Hotnews>
+        <Hotnews>I not yet breakfast today</Hotnews>
+      </div>,
+        document.getElementById('root')
+      );
+
+    </script>
+    
+  </body>
+</html>

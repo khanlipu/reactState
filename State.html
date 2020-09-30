@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Staet</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      function Title(props){
+          return(
+              <div>
+                <h1>{props.titlefun}</h1>
+                <p>Edited {props.count}</p>
+                <p>Deleted {props.countDelete}</p>
+              </div>
+          )
+      }
+
+      class Hotnews extends React.Component{
+          constructor(){
+              super()
+              this.state = {
+                  totalEditCount: 0,
+                  totalDeleteCount: 0
+              }
+          }
+        edit(){
+            alert("Edit button clicked");               
+          this.setState({totalEditCount : this.state.totalEditCount +1});
+        }
+
+        delete(){
+          alert("Delete button clicked");
+          this.setState({totalDeleteCount : this.state.totalDeleteCount +1});
+        }
+        render(){
+        const totalEditCount = this.state.totalEditCount;
+        const totalDeleteCount = this.state.totalDeleteCount;    
+        const props = this.props
+          return(
+            <div className="newsContainer">
+
+              <Title titlefun={this.props.title} count={totalEditCount} countDelete={totalDeleteCount}/>
+              <p>{this.props.children}</p>
+              <div>
+                <button onClick={()=>this.edit()} className="edit">Edit</button>
+                <button onClick={()=> this.delete()}className="delete">Delete</button>
+                
+              </div>
+              {/*{!! totalEditCount && (<span style={{background:'white', color:'green'}}>Total edit clicked {totalEditCount}</span>)}
+              {!! totalDeleteCount && (<span style={{background:'white', marginLeft:'10px', color:'red'}}>Total Delete clicked {totalDeleteCount}</span>)}
+            */}
+              </div>
+          );
+        }
+      }
+
+      ReactDOM.render(
+      <div className="container">
+        <Hotnews title="New 1">Rain not yet come today in Shah Alam</Hotnews>
+        <Hotnews title="News 2">I not yet breakfast today</Hotnews>
+      </div>,
+        document.getElementById('root')
+      );
+
+    </script>
+    
+  </body>
+</html>
